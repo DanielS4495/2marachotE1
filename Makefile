@@ -5,7 +5,7 @@ CXXFLAGS=-std=c++11 -Werror -Wsign-conversion -pedantic
 VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all  --error-exitcode=99
 LDLIBS=-pthread
 
-SOURCES=Graph.cpp Algorithms.cpp MyTest,cpp #TestCounter.cpp Test.cpp Demo.cpp
+SOURCES=Graph.cpp Algorithms.cpp MyTest.cpp #TestCounter.cpp Test.cpp Demo.cpp
 OBJECTS=$(subst .cpp,.o,$(SOURCES))
 
 # run: demo
@@ -20,6 +20,7 @@ run: MyTest
 
 MyTest:  Graph.o Algorithms.o MyTest.o
 	$(CXX) $(CXXFLAGS) $^ -o MyTest
+
 # test: TestCounter.o Test.o $(OBJECTS)
 # 	$(CXX) $(CXXFLAGS) $^ -o test
 
@@ -32,6 +33,7 @@ tidy:
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
+
 
 clean:
 	rm -f *.o demo test MyTest
