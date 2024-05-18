@@ -18,8 +18,8 @@ namespace ariel
 
     public:
         void loadGraph(const vector<vector<int>> &graph);
-        std::string printGraph();
-        size_t getSize();
+        std::string printGraph() const;
+        size_t getSize() const;
         std::vector<int> getNeighbors(int v) const;
         int getWeight(size_t u, size_t v) const;
 
@@ -27,28 +27,28 @@ namespace ariel
 
         Graph operator+(); // unari
 
-        void operator+=(const Graph &g2);
+        void operator+=(const Graph &g);
 
-        Graph operator-(const Graph &g2);
+        Graph operator-(const Graph &g);
 
         Graph operator-(); // unari
 
-        void operator-=(const Graph &g2);
+        void operator-=(const Graph &g);
 
         /* comparison operators Declarations */
-        bool operator>(const Graph &g2) const;
+        bool operator>(const Graph &g) const;
 
-        bool operator>=(const Graph &g2) const;
+        bool operator>=(const Graph &g) const;
 
-        bool operator<(const Graph &g2) const;
+        bool operator<(const Graph &g) const;
 
-        bool operator<=(const Graph &g2) const;
+        bool operator<=(const Graph &g) const;
 
-        bool operator==(const Graph &g2);
+        bool operator==(const Graph &g) const;
 
-        friend bool operator==(const Graph &g1, const Graph &g2);
+        // friend bool operator==(const Graph &g1, const Graph &g2);
 
-        bool operator!=(const Graph &g2);
+        bool operator!=(const Graph &g);
 
         /* Increment operations Declarations */
         Graph operator++();
@@ -59,21 +59,22 @@ namespace ariel
         Graph operator--(int);
 
         /* Multiplication operations Declarations */
-        Graph operator*(const Graph &g2);
-        
+        Graph operator*(const Graph &g);
+
         // Graph operator*(int num);
 
         friend Graph operator*(int num, Graph &g);
 
         friend Graph operator*(Graph &g, int num);
 
-        void operator*=(const Graph &g2);
+        void operator*=(const Graph &g);
 
         void operator*=(int num);
 
-        // friend void CHECK_FOR_ERROR(const Graph &g1, const Graph &g2);
+        // friend istream &operator>>(istream &in, const Graph &g);
+        friend ostream &operator<<(ostream &out, const Graph &g);
 
-        // friend void CHECK_MULTIPLICATION(const Graph &g1, const Graph &g2);
+        friend void CHECK_FOR_SIZE(const Graph &g1, const Graph &g2);
 
         // friend pair<double, double> sum_of_Graph(const Graph &g1, const Graph &g2);
     };

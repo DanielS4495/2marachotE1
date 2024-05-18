@@ -38,8 +38,8 @@ int main(int argc, char **argv)
         {0, 0, 0, 1, 1, 0},
     };
     g1.loadGraph(graph2);
-    g = g*g1;
-    cout<<g.printGraph()<<endl;
+    g =g1;
+    cout<<g<<endl<<g1<<(g!=g1)<<endl;
 //     if (Algorithms::isConnected(g) == true)
 //         cout << "2 - isConnected(g) == true" << endl;
 
