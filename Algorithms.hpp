@@ -11,8 +11,9 @@ namespace ariel
     private:
         static int DFS(int v, vector<bool> &visited, vector<int> &parent, Graph &graph);
         static std::string constructCyclePath(int v, const vector<int> &parent);
-        static bool bfs(Graph &g, int src, std::vector<int> &color,
+        static bool BFSColor(Graph &g, int src, std::vector<int> &color,
                         std::vector<int> &groupA, std::vector<int> &groupB);
+
     public:
         static bool isConnected(Graph &g);                             // מחזיר האם הגרף קשיר
         static std::string shortestPath(Graph &g, int start, int end); // מחזיר מסלול הקצר ביותר

@@ -15,11 +15,13 @@ namespace ariel
         std::vector<std::vector<int>> g;
         std::vector<std::vector<int>> weights;
         void setWeight(size_t i, size_t j, int weight);
+        int countWeights() const;
+        bool isSubgraph(const Graph& g1, const Graph& g2) const;
 
     public:
         void loadGraph(const vector<vector<int>> &graph);
         std::string printGraph() const;
-        size_t getSize() const;
+        size_t getsize() const;
         std::vector<int> getNeighbors(int v) const;
         int getWeight(size_t u, size_t v) const;
 
