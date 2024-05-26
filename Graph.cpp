@@ -87,7 +87,7 @@ namespace ariel
 
         int n = this->getsize();
 
-        // Loop through each pair of nodes and sum their weights
+        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -118,7 +118,7 @@ namespace ariel
 
         int n = this->getsize();
 
-        // Loop through each pair of nodes and sum their weights
+        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -141,35 +141,42 @@ namespace ariel
     {
         *this = *this - g;
     }
-    bool isSubgraph(const Graph& g1, const Graph& g2) const{
-        if (g1.getsize() > g2.getsize()) {
+    bool Graph::isSubgraph(const Graph &g1, const Graph &g2) const
+    {
+        if (g2.getsize() > g1.getsize())
+        {
             return false;
         }
 
-        size_t g2Size = g2.getsize();
         size_t g1Size = g1.getsize();
-        
-            
-        // Iterate through all possible sizes of subgraphs of g2
-        for (size_t size = g2Size; size >= g1Size; --size) {
-            // Iterate through all possible starting positions in g2
-            for (size_t row = 0; row <= g2Size - size; ++row) {
-                for (size_t col = 0; col <= g2Size - size; ++col) {
-                    bool isSub = true;
-                    // Check if the subgraph matches g1
-                    for (size_t i = 0; i < g1Size; ++i) {
-                        for (size_t j = 0; j < g1Size; ++j) {
-                            if (g1.getWeight(i, j) != g2.getWeight(row + i, col + j)) {
-                                isSub = false;
-                                break;
-                            }
+        size_t g2Size = g2.getsize();
+
+        // Iterate through all possible starting positions in g1
+        for (size_t row = 0; row <= g1Size - g2Size; ++row)
+        {
+            for (size_t col = 0; col <= g1Size - g2Size; ++col)
+            {
+                bool isSub = true;
+
+                // Check if the subgraph matches g2
+                for (size_t i = 0; i < g2Size; ++i)
+                {
+                    for (size_t j = 0; j < g2Size; ++j)
+                    {
+                        if (g2.getWeight(i, j) != g1.getWeight(row + i, col + j))
+                        {
+                            isSub = false;
+                            break;
                         }
-                        if (!isSub) break;
                     }
-                    // If the subgraph matches g1, return true
-                    if (isSub) {
-                        return true;
-                    }
+                    if (!isSub)
+                        break;
+                }
+
+                // If the subgraph matches g2, return true
+                if (isSub)
+                {
+                    return true;
                 }
             }
         }
@@ -177,33 +184,32 @@ namespace ariel
         // If no matching subgraph is found, return false
         return false;
     }
-    bool Graph::operator>(const Graph &g) const //need to change
+    bool Graph::operator>(const Graph &g) const
     {
-        if (Graph::isSubgraph(*this, g)) {
-            return true; 
+        if (Graph::isSubgraph(*this, g))
+        {
+            return true;
         }
-        if (this->countWeights() != g.countWeights()) {
+        if (this->countWeights() != g.countWeights())
+        {
             return this->countWeights() > g.countWeights();
         }
-        return this->getsize() > g.getsize(); 
+        return this->getsize() > g.getsize();
     }
 
-    bool Graph::operator>=(const Graph &g) const //need to change
+    bool Graph::operator>=(const Graph &g) const
     {
-        if (*this > g)
-            return true;
-        else
-            return false;
+        return (*this > g) || (*this == g);
     }
 
-    bool Graph::operator<(const Graph &g) const //what happend if its equal?
+    bool Graph::operator<(const Graph &g) const
     {
-        return !(*this > g);
+        return (*this != g) && !(*this > g);
     }
 
-    bool Graph::operator<=(const Graph &g) const //need to change
+    bool Graph::operator<=(const Graph &g) const
     {
-        return false;
+        return (*this < g) || (*this == g);
     }
 
     bool Graph::operator==(const Graph &g) const
@@ -221,7 +227,7 @@ namespace ariel
         }
         return true;
     }
-    bool Graph::operator!=(const Graph &g)
+    bool Graph::operator!=(const Graph &g) const
     {
         return !(*this == g);
     }
@@ -283,7 +289,7 @@ namespace ariel
 
         int n = this->getsize();
 
-        // Loop through each pair of nodes and sum their weights
+        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -301,7 +307,7 @@ namespace ariel
     Graph operator*(Graph &g, int num)
     {
         int n = g.getsize();
-        // Loop through each pair of nodes and sum their weights
+        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -311,6 +317,48 @@ namespace ariel
             }
         }
         return g;
+    }
+    Graph operator+(int num, Graph &g)
+    {
+
+        int n = g.getsize();
+
+        
+        for (size_t i = 0; i < n; i++)
+        {
+            for (size_t j = 0; j < n; j++)
+            {
+                int new_weight = g.getWeight(i, j) + num;
+                g.setWeight(i, j, new_weight);
+            }
+        }
+
+        return g;
+    }
+    Graph operator+(Graph &g, int num)
+    {
+        return num+g;
+    }
+    Graph operator-(int num, Graph &g) {
+        Graph result = g;
+        size_t n = g.getsize();
+        for (size_t i = 0; i < n; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                result.setWeight(i, j, num - g.getWeight(i, j));
+            }
+        }
+        return result;
+    }
+
+    Graph operator-(Graph &g, int num) {
+        Graph result = g;
+        size_t n = g.getsize();
+        for (size_t i = 0; i < n; ++i) {
+            for (size_t j = 0; j < n; ++j) {
+                result.setWeight(i, j, g.getWeight(i, j) - num);
+            }
+        }
+        return result;
     }
     Graph operator*(int num, Graph &g)
     {
