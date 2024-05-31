@@ -19,9 +19,9 @@ Algorithms.cpp
     getNeighbors(v) - מקבלת איבר ומחזירה את השכנים שלו
     countWeights - מחזיר את הכמות צלעות של הגרף
     getWeight(i,j) - מקבלת שני איברים ומחזירה את משקל הצלע ביניהם
-    operator (+/-/* /++/-- />/>=/</<=/==/!=/ +=/-=/*=)
-    operator<< - 
-    CHECK_FOR_SIZE(const Graph &g1, const Graph &g2)
+    operator (+/-/* /++/-- />/>=/</<=/==/!=/ +=/-=/*=) - כל האופורטורים שמבצעים על שני גרפים או על גרף ומספר
+    operator<< - אופרטור פלט הדפסה של הגרף
+    CHECK_FOR_SIZE(const Graph &g1, const Graph &g2) - בודק האם הגרפים ניתנים לחיבור\חיסור\כפל
     
 
 
