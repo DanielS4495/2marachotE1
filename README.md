@@ -17,7 +17,13 @@ Algorithms.cpp
     printGraph - שמדפיסה את הייצוג של הגרף
     getsize - מחזירה את גודל הגרף
     getNeighbors(v) - מקבלת איבר ומחזירה את השכנים שלו
+    countWeights - מחזיר את הכמות צלעות של הגרף
     getWeight(i,j) - מקבלת שני איברים ומחזירה את משקל הצלע ביניהם
+    operator (+/-/* /++/-- />/>=/</<=/==/!=/ +=/-=/*=)
+    operator<< - 
+    CHECK_FOR_SIZE(const Graph &g1, const Graph &g2)
+    
+
 
 הקובץ Algorithms.cpp מכיל מימושים לאלגוריתמים על גרפים. ביניהם:
 
