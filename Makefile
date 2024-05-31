@@ -32,3 +32,4 @@ valgrind: demo test
 
 clean:
 	rm -f *.o demo test MyTest
+ 

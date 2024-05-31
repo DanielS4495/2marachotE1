@@ -14,55 +14,69 @@ using namespace std;
 
 int main()
 {
-//     ariel::ariel::Graph g1;
-//     // 3x3 matrix that represents a connected ariel::Graph.
-//     vector<vector<int>> ariel::Graph = {
-//         {0, 0, 0, 0},
-//         {0, 0, 0, 0},
-//         {0, 0, 0, 3},
-//         {0, 0, 2, 3}};
-//     g1.loadGraph(ariel::Graph); // Load the ariel::Graph to the object.
 
-//     cout << g1 << endl; // Should print the matrix of the ariel::Graph: [0, 1, 0], [1, 0, 1], [0, 1, 0]
 
-//     // 3x3 matrix that represents a weighted connected ariel::Graph.
-//     vector<vector<int>> weightedGraph = {
-//         {0, 3},
-//         {2, 3},
-//     };
-//     ariel::ariel::Graph g2;
-//     g2.loadGraph(weightedGraph); // Load the ariel::Graph to the object.
-//     cout << g2 << endl;
+    // ariel::Graph g;
+    // // 3x3 matrix that represents a connected graph.
+    // vector<vector<int>> graph = {
+    //     {0, 1, 0},
+    //     {1, 0, 1},
+    //     {0, 1, 0}};
+    // g.loadGraph(graph); // Load the graph to the object.
 
-//     cout << (g1 < g2) << endl;
-//     // ariel::ariel::Graph g3 = g1 + g2; // Add the two graphs together.
-//     // cout<<g3;           // Should print the matrix of the ariel::Graph: [0, 2, 1], [2, 0, 3], [1, 3, 0]
+    // g.printGraph();                                    // Should print: "Graph with 3 vertices and 4 edges."
+    // cout << Algorithms::isConnected(g) << endl;        // Should print: "1" (true).
+    // cout << Algorithms::shortestPath(g, 0, 2) << endl; // Should print: 0->1->2.
+    // cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "0" (false).
+    // cout << Algorithms::isBipartite(g) << endl;        // Should print: "The graph is bipartite: A={0, 2}, B={1}."
 
-//     // // g1 *= -2;        // Multiply the ariel::Graph by -2.
-//     // cout<<g1; // Should print the matrix of the ariel::Graph: [0, -2, 0], [-2, 0, -2], [0, -2, 0]
+    // // 5x5 matrix that represents a non-connected graph with a cycle.
+    // vector<vector<int>> graph22 = {
+    //     {0, 1, 1, 0, 0},
+    //     {1, 0, 1, 0, 0},
+    //     {1, 1, 0, 1, 0},
+    //     {0, 0, 1, 0, 0},
+    //     {0, 0, 0, 0, 0}};
 
-//     // // g1 /= -2;
-//     // ariel::ariel::Graph g4 = g1 * g2; // Multiply the two graphs together.
-//     // cout<<endl;
-//     // cout<<g4;           // Should print the multiplication of the matrices of g1 and g2: [0, 0, 2], [1, 0, 1], [1, 0, 0]
+    // g.loadGraph(graph22); // Load the graph to the object.
 
-//     // // 5x5 matrix that represents a connected ariel::Graph.
-//     // vector<vector<int>> graph2 = {
-//     //     {0, 1, 0, 0, 1},
-//     //     {1, 0, 1, 0, 0},
-//     //     {0, 1, 0, 1, 0},
-//     //     {0, 0, 1, 0, 1},
-//     //     {1, 0, 0, 1, 0}};
-//     // ariel::ariel::Graph g5;
-//     // g5.loadGraph(graph2); // Load the ariel::Graph to the object.
-//     // try
-//     // {
-//     //     ariel::ariel::Graph g6 = g5 * g1; // Multiply the two graphs together.
-//     // }
-//     // catch (const std::invalid_argument &e)
-//     // {
-//     //     cout << e.what() << endl; // Should print "The number of columns in the first matrix must be equal to the number of rows in the second matrix."
-//     // }
+    // g.printGraph();                                    // Should print: "Graph with 5 vertices and 8 edges."
+    // cout << Algorithms::isConnected(g) << endl;        // Should print: "0" (false).
+    // cout << Algorithms::shortestPath(g, 0, 4) << endl; // Should print: "-1" (there is no path between 0 and 4).
+    // cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "The cycle is: 0->1->2->0".
+    // cout << Algorithms::isBipartite(g) << endl;        // Should print: "0" (false).
+
+    // // 5x5 matrix that reprsents a connected weighted graph.
+    // vector<vector<int>> graph33 = {
+    //     {0, 1, 2, 0, 0},
+    //     {1, 0, 3, 0, 0},
+    //     {2, 3, 0, 4, 0},
+    //     {0, 0, 4, 0, 5},
+    //     {0, 0, 0, 5, 0}};
+    // g.loadGraph(graph33); // Load the graph to the object.
+
+    // g.printGraph();                                    // Should print: "Graph with 5 vertices and 10 edges."
+    // cout << Algorithms::isConnected(g) << endl;        // Should print: "1" (true).
+    // cout << Algorithms::shortestPath(g, 0, 4) << endl; // Should print: 0->2->3->4.
+    // cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "0 -> 1 -> 2 -> 0" (false).
+    // cout << Algorithms::isBipartite(g) << endl;        // Should print: "The Graph is not bipartite"
+
+    // // 5x4 matrix that reprsents invalid graph.
+    // vector<vector<int>> graph44 = {
+    //     {0, 1, 2, 0},
+    //     {1, 0, 3, 0},
+    //     {2, 3, 0, 4},
+    //     {0, 0, 4, 0},
+    //     {0, 0, 0, 5}};
+    // try
+    // {
+    //     g.loadGraph(graph44); // Load the graph to the object.
+    // }
+    // catch (const std::invalid_argument &e)
+    // {
+    //     cout << e.what() << endl; // Should print: "Invalid graph: The graph is not a square matrix."
+    // }
+
  // Test Case 1: Basic Graphs
     ariel::Graph g1;
     vector<vector<int>> graph1 = {

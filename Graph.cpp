@@ -36,7 +36,7 @@ namespace ariel
     std::vector<int> Graph::getNeighbors(int v) const
     {
         vector<int> check(g.size(), -1);
-        if (v < 0 || static_cast<size_t>(v) > g.size())
+        if (v < 0 || (size_t)v > g.size())
         {
             throw std::out_of_range("Vertex index out of range");
         }
@@ -87,7 +87,6 @@ namespace ariel
 
         int n = this->getsize();
 
-        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -118,7 +117,6 @@ namespace ariel
 
         int n = this->getsize();
 
-        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -186,7 +184,14 @@ namespace ariel
     }
     bool Graph::operator>(const Graph &g) const
     {
-        if (Graph::isSubgraph(*this, g))
+        bool sub = false;
+        sub = Graph::isSubgraph(*this, g);
+
+        if (sub && Graph::isSubgraph(g, *this)) // if the graph equal
+        {
+            return false;
+        }
+        if (sub == true) // if sub graph
         {
             return true;
         }
@@ -204,28 +209,17 @@ namespace ariel
 
     bool Graph::operator<(const Graph &g) const
     {
-        return (*this != g) && !(*this > g);
+        return !(*this >= g);
     }
 
     bool Graph::operator<=(const Graph &g) const
     {
-        return (*this < g) || (*this == g);
+        return !(*this > g);
     }
 
     bool Graph::operator==(const Graph &g) const
     {
-        if (this->getsize() != g.getsize())
-            return false;
-        else
-        {
-            for (size_t i = 0; i < this->getsize(); i++)
-            {
-                for (size_t j = 0; j < this->getsize(); j++)
-                    if (this->getWeight(i, j) != g.getWeight(i, j))
-                        return false;
-            }
-        }
-        return true;
+        return !(*this > g) && !(g > *this);
     }
     bool Graph::operator!=(const Graph &g) const
     {
@@ -247,14 +241,7 @@ namespace ariel
     Graph Graph::operator++(int)
     {
         Graph copy = *this;
-        for (size_t i = 0; i < this->getsize(); i++)
-        {
-            for (size_t j = 0; j < this->getsize(); j++)
-            {
-                if (this->getWeight(i, j) != 0)
-                    this->setWeight(i, j, this->getWeight(i, j) + 1);
-            }
-        }
+        ++*this;
         return copy;
     }
     Graph Graph::operator--()
@@ -272,14 +259,7 @@ namespace ariel
     Graph Graph::operator--(int)
     {
         Graph copy = *this;
-        for (size_t i = 0; i < this->getsize(); i++)
-        {
-            for (size_t j = 0; j < this->getsize(); j++)
-            {
-                if (this->getWeight(i, j) != 0)
-                    this->setWeight(i, j, this->getWeight(i, j) - 1);
-            }
-        }
+        --*this;
         return copy;
     }
     Graph Graph::operator*(const Graph &g)
@@ -289,7 +269,6 @@ namespace ariel
 
         int n = this->getsize();
 
-        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -307,7 +286,7 @@ namespace ariel
     Graph operator*(Graph &g, int num)
     {
         int n = g.getsize();
-        
+
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -323,7 +302,6 @@ namespace ariel
 
         int n = g.getsize();
 
-        
         for (size_t i = 0; i < n; i++)
         {
             for (size_t j = 0; j < n; j++)
@@ -337,24 +315,30 @@ namespace ariel
     }
     Graph operator+(Graph &g, int num)
     {
-        return num+g;
+        return num + g;
     }
-    Graph operator-(int num, Graph &g) {
+    Graph operator-(int num, Graph &g)
+    {
         Graph result = g;
         size_t n = g.getsize();
-        for (size_t i = 0; i < n; ++i) {
-            for (size_t j = 0; j < n; ++j) {
+        for (size_t i = 0; i < n; ++i)
+        {
+            for (size_t j = 0; j < n; ++j)
+            {
                 result.setWeight(i, j, num - g.getWeight(i, j));
             }
         }
         return result;
     }
 
-    Graph operator-(Graph &g, int num) {
+    Graph operator-(Graph &g, int num)
+    {
         Graph result = g;
         size_t n = g.getsize();
-        for (size_t i = 0; i < n; ++i) {
-            for (size_t j = 0; j < n; ++j) {
+        for (size_t i = 0; i < n; ++i)
+        {
+            for (size_t j = 0; j < n; ++j)
+            {
                 result.setWeight(i, j, g.getWeight(i, j) - num);
             }
         }
@@ -372,11 +356,6 @@ namespace ariel
     {
         *this = *this * num;
     }
-    // istream &operator>>(istream &in, const Graph &g)
-    // {
-    //     // TODO: insert return statement here
-    //     return in;
-    // }
     ostream &operator<<(ostream &out, const Graph &g)
     {
         // TODO: insert return statement here
